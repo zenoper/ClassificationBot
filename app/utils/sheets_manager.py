@@ -1,3 +1,4 @@
+import json
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -6,9 +7,12 @@ import config as Config
 
 class GoogleSheetsManager:
     def __init__(self):
+        # Load credentials from config
+        credentials_info = json.loads(Config.GOOGLE_CREDENTIALS)
+        
         self.SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-        self.creds = Credentials.from_service_account_file(
-            'credentials.json',
+        self.creds = Credentials.from_service_account_info(
+            credentials_info,
             scopes=self.SCOPES
         )
         self.service = build('sheets', 'v4', credentials=self.creds)
