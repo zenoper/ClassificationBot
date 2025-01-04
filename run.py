@@ -10,9 +10,6 @@ from app.middlewares import ThrottlingMiddleware
 from app.handlers import routers  # Import all routers
 
 async def main():
-    # Configure logging
-    logging.basicConfig(level=logging.INFO)
-
     storage = MemoryStorage()
     bot = Bot(token=Config.BOT_TOKEN)
     dp = Dispatcher(storage=storage)
